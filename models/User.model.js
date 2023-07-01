@@ -1,13 +1,14 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
 const userSchema = new Schema(
   {
     username: {
       type: String,
       trim: true,
       required: false,
-      unique: true
+      unique: true,
+      minlength: [3, "Name must have at least 3 characters"]
     },
     email: {
       type: String,
@@ -22,11 +23,11 @@ const userSchema = new Schema(
     }
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
+     
     timestamps: true
   }
 );
 
-const User = model("User", userSchema);
 
-module.exports = User;
+
+module.exports = model("User", userSchema);
