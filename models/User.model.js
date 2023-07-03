@@ -21,6 +21,7 @@ const userSchema = new Schema(
       type: String,
       required: true
     }
+    //image, array de recetas (para crear), array de modelo recetas, 
   },
   {
      
