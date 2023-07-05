@@ -1,7 +1,7 @@
 require("dotenv").config();
 require("./db");
-require("./config")(app);
-require("./error-handling")(app);
+//require("./config")(app);
+//require("./error-handling")(app);
 
 const express = require("express");
 const app = express();
@@ -11,7 +11,7 @@ const projectName = "backend-mealdb";
 app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
 app.use('/api', require('./routes'))
 
-const indexRoutes = require("./routes/index.routes");
+const indexRoutes = require("./routes");
 app.use("/", indexRoutes);
 
 
