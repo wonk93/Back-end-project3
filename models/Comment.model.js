@@ -6,7 +6,11 @@ description: {
     type: String,
     maxLength: 300,
     required: true,
-}
+},
+author: {
+    type: String,
+    required: true,
+},
 }
 );
 

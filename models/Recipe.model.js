@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const recipeSchema = new Schema({
+  author: {
+    type: String,
+    trim: true, 
+    require: false,
+    toUpperCase: true,
+  },
   title: {
     type: String,
     trim: true,
@@ -12,8 +18,8 @@ const recipeSchema = new Schema({
   image: {
     type: Image,
     trim: true,
-    requiered: true, 
-    unique: true, 
+    requiered: true,
+    unique: true,
   },
   instructions: {
     type: String,
@@ -23,7 +29,7 @@ const recipeSchema = new Schema({
     maxLength: 500,
   },
   ingredients: [{ type: Schema.Types.ObjectId, ref: "Ingredient" }],
-  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }]
+  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 const Recipe = model("Recipe", recipeSchema);
