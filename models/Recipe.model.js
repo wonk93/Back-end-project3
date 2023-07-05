@@ -22,7 +22,8 @@ const recipeSchema = new Schema({
     unique: true,
     maxLength: 500,
   },
-  ingredients: [{ type: Schema.Types.ObjectId, ref: "Ingredient" }]
+  ingredients: [{ type: Schema.Types.ObjectId, ref: "Ingredient" }],
+  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }]
 });
 
 const Recipe = model("Recipe", recipeSchema);
