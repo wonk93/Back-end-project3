@@ -14,11 +14,11 @@ app.use('/api', require('./routes'))
 const profileRoutes = require("./routes/profile.routes");
 app.use("/profile", profileRoutes);
 
-const profileRoutes = require("./routes/comment.routes");
-app.use("/comment", profileRoutes);
+const commentRoutes = require("./routes/comment.routes");
+app.use("/comment", commentRoutes);
 
-const profileRoutes = require("./routes/recipe.routes");
-app.use("/recipe", profileRoutes);
+const recipeRoutes = require("./routes/recipe.routes");
+app.use("/recipe", recipeRoutes);
 
 const indexRoutes = require("./routes");
 app.use("/", indexRoutes);

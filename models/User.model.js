@@ -24,9 +24,10 @@ const userSchema = new Schema(
       required: true,
     },
     image: {
-      type: Image,
+      type: String,
       requiered: false,
     },
+    recipes: [{ type: Schema.Types.ObjectId, ref: "Recipe" }]
   },
   {
     timestamps: true,
