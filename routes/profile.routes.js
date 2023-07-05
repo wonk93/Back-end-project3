@@ -16,12 +16,12 @@ router.get("/edit", isAuthenticated, (req, res, next) => {
   });
 });
 
-router.post("/edit", isAuthenticated, uploader.single("imageProfile"), (req, res, next) => {
+router.post("/edit", isAuthenticated, uploader.single("image"), (req, res, next) => {
   const { currentUser } = req.session;
   const data = { ...req.body };
 
   if (req.file) {
-    data.imageProfile = req.file.path;
+    data.image = req.file.path;
   }
   User.findByIdAndUpdate(currentUser._id, data).then(() => {
     res.redirect("/profile");

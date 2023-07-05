@@ -12,7 +12,7 @@ const recipeSchema = new Schema({
     type: String,
     trim: true,
     required: true,
-    unique: true,
+    unique: false,
     toUpperCase: true,
   },
   image: {
@@ -28,7 +28,7 @@ const recipeSchema = new Schema({
     unique: true,
     maxLength: 500,
   },
-  ingredients: [{ type: Schema.Types.ObjectId, ref: "Ingredient" }],
+  ingredients: {type: String},
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 

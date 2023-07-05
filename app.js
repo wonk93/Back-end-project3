@@ -1,10 +1,10 @@
 require("dotenv").config();
 require("./db");
-//require("./config")(app);
-//require("./error-handling")(app);
+
 
 const express = require("express");
 const app = express();
+require("./config")(app);
 const capitalize = require("./utils/capitalize");
 const projectName = "backend-mealdb";
 
@@ -19,9 +19,11 @@ app.use("/comment", commentRoutes);
 
 const recipeRoutes = require("./routes/recipe.routes");
 app.use("/recipe", recipeRoutes);
+require("./error-handling")(app);
 
-const indexRoutes = require("./routes");
-app.use("/", indexRoutes);
+
+// const indexRoutes = require("./routes");
+// app.use("/", indexRoutes);
 
 
 

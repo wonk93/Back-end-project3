@@ -10,6 +10,7 @@ const Recipe = require("../models/Recipe.model");
 router.post("/recipe-create", isAuthenticated, async (req, res) => {
     const { body } = req;
     const { author: authorId } = req.body;
+    console.log(body);
     // ToDo: Consultar si se cambia con el profesor.
     // const { currentUser } = req.session;  
     const recipe = await Recipe.create(body);

@@ -7,6 +7,7 @@ const { isAuthenticated } = require("../middlewares/verifyToken.middleware");
 const saltRounds = 10;
 
 router.post("/signup", (req, res, next) => {
+  console.log(req.body);
   const { email, password, username } = req.body;
 
   if (password.length < 2) {

@@ -8,8 +8,9 @@ description: {
     required: true,
 },
 author: {
-    type: String,
-    required: true,
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    requiered: true,
 },
 }
 );
