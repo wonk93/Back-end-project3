@@ -4,7 +4,7 @@ const { Schema, model } = mongoose;
 const recipeSchema = new Schema({
   author: {
     type: String,
-    trim: true, 
+    trim: true,
     require: false,
     toUpperCase: true,
   },
@@ -28,7 +28,7 @@ const recipeSchema = new Schema({
     unique: true,
     maxLength: 500,
   },
-  ingredients: {type: String},
+  ingredients: [String],
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 

@@ -7,32 +7,32 @@ const saltRounds = 10;
 const User = require("../models/User.model");
 const Recipe = require("../models/Recipe.model");
 
-router.post("/recipe-create", isAuthenticated, async (req, res) => {
-    const { body } = req;
-    const { author: authorId } = req.body;
-    console.log(body);
-    // ToDo: Consultar si se cambia con el profesor.
-    // const { currentUser } = req.session;  
-    const recipe = await Recipe.create(body);
-    await User.findByIdAndUpdate(authorId, { $push: { recipes: recipe._id } });
-    res.redirect("/");
-  });
+router.post("/", isAuthenticated, async (req, res) => {
+  const { _id } = req.payload;
+  const newRecipe = await Recipe.create(req.body);
+  await User.findByIdAndUpdate(_id, { $push: { recipes: newRecipe._id } });
 
-  router.get("/recipes/byAuthor", isAuthenticated, async (req, res) => {
-    const { currentUser } = req.session; 
-    // ToDo: Consultar si se cambia con el profesor.
-    // OPCION 1
-    // const recipes = await Recipe.find();
-    // return recipes.where(author = currentUser._id);
-    // OPCION 2
-    // return await Recipe.where( author = currentUser._id);
-    // OPCION 3
-    return await Recipe.find( recipe => recipe.author == currentUser._id);
-  });
+  // ToDo: Cambiar por la otra linea comentada
+  return res.status(200).json(newRecipe);
+  // res.redirect("/");
+});
 
-  router.get("/recipes/byName/:recipeName", isAuthenticated, async (req, res) => {
-    return await Recipe.find( recipe => recipe.name == req.params.recipeName);
-  });
+router.get("/byName/:recipeName", isAuthenticated, async (req, res) => {
+  const recipes = await Recipe.find().populate("ingredients").populate("comments");
+  let result = recipes.filter((r) => r.title.toLowerCase() == req.params.recipeName.toLowerCase());
+  return res.status(200).json(result);
+});
 
+router.get("/byAuthor", isAuthenticated, async (req, res) => {
+  const { _id } = req.payload;
+
+  // ToDo: esto de aqui hay que revisarlo, falla
+  const currentUser = User.findById(_id);
+  console.log(currentUser);
+  const recipes = await Recipe.find().populate("ingredients").populate("comments");
+  let result = recipes.filter((r) => r.author == currentUser.userName);
+  return res.status(200).json(result);
+});
 
 module.exports = router;
+
