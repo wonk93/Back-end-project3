@@ -22,10 +22,17 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+      unique: false,
+    },
+    nickName: {
+      type: String,
+      required: false,
+      unique: false,
     },
     image: {
       type: String,
       requiered: false,
+      unique: false,
     },
     recipes: [{ type: Schema.Types.ObjectId, ref: "Recipe" }]
   },

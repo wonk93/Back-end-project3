@@ -6,6 +6,7 @@ const commentSchema = new Schema({
     type: String,
     maxLength: 300,
     required: true,
+    unique: false,
   },
 });
 

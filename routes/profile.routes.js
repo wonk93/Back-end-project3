@@ -5,29 +5,34 @@ const uploader = require("../config/cloudinary.config");
 const { isAuthenticated } = require("../middlewares/verifyToken.middleware");
 
 router.get("/", isAuthenticated, (req, res, next) => {
-  const { currentUser } = req.session;
-  return User.findById(currentUser._id);
-});
-
-router.get("/edit", isAuthenticated, (req, res, next) => {
-  const { currentUser } = req.session;
-  User.findById(currentUser._id).then(user => {
-    res.render("profile/edit-profile", user);
+  const { email } = req.payload;
+  User.findOne({ email }).then((foundUser) => {
+    if (foundUser) {
+      return res.status(200).json(foundUser);
+    } else {
+      return res.status(400).json({ message: "User doesn't exist." });
+    }
   });
 });
 
-router.post("/edit", isAuthenticated, uploader.single("image"), (req, res, next) => {
-  const { currentUser } = req.session;
-  const data = { ...req.body };
-
-  if (req.file) {
-    data.image = req.file.path;
-  }
-  User.findByIdAndUpdate(currentUser._id, data).then(() => {
-    res.redirect("/profile");
+router.put("/", isAuthenticated, (req, res, next) => {
+  const { email } = req.payload;
+  const { newImage, newNickName } = req.body;
+  User.findOne({ email }).then((foundUser) => {
+    if (foundUser) {
+      const userToUpdate = {
+        ...foundUser,
+        nickName: newNickName,
+        image: newImage,
+      };
+      const updatedUser = User.findByIdAndUpdate(foundUser._id, userToUpdate, {
+        new: true,
+      });
+      return res.status(200).json(updatedUser);
+    } else {
+      return res.status(400).json({ message: "User doesn't exist." });
+    }
   });
 });
-
-
 
 module.exports = router;

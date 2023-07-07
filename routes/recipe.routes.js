@@ -18,21 +18,24 @@ router.post("/", isAuthenticated, async (req, res) => {
 });
 
 router.get("/byName/:recipeName", isAuthenticated, async (req, res) => {
-  const recipes = await Recipe.find().populate("ingredients").populate("comments");
-  let result = recipes.filter((r) => r.title.toLowerCase() == req.params.recipeName.toLowerCase());
+  const recipes = await Recipe.find()
+    .populate("ingredients")
+    .populate("comments");
+  let result = recipes.filter(
+    (r) => r.title.toLowerCase() == req.params.recipeName.toLowerCase()
+  );
   return res.status(200).json(result);
 });
 
 router.get("/byAuthor", isAuthenticated, async (req, res) => {
-  const { _id } = req.payload;
-
-  // ToDo: esto de aqui hay que revisarlo, falla
-  const currentUser = User.findById(_id);
-  console.log(currentUser);
-  const recipes = await Recipe.find().populate("ingredients").populate("comments");
-  let result = recipes.filter((r) => r.author == currentUser.userName);
+  const { userName } = req.payload;
+  const recipes = await Recipe.find()
+    .populate("ingredients")
+    .populate("comments");
+  let result = recipes.filter(
+    (r) => r.author.toLowerCase() == userName.toLowerCase()
+  );
   return res.status(200).json(result);
 });
 
 module.exports = router;
-

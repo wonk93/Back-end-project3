@@ -6,6 +6,7 @@ const recipeSchema = new Schema({
     type: String,
     trim: true,
     require: false,
+    unique: false,
     toUpperCase: true,
   },
   title: {
@@ -19,13 +20,13 @@ const recipeSchema = new Schema({
     type: String,
     trim: true,
     requiered: true,
-    unique: true,
+    unique: false,
   },
   instructions: {
     type: String,
     trim: true,
     required: true,
-    unique: true,
+    unique: false,
     maxLength: 500,
   },
   ingredients: [String],
