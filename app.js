@@ -17,8 +17,12 @@ app.use("/profile", profileRoutes);
 const commentRoutes = require("./routes/comment.routes");
 app.use("/comment", commentRoutes);
 
+const cloudinaryRoutes = require("./routes/cloudinary.routes");
+app.use("/cloudinary", cloudinaryRoutes);
+
 const recipeRoutes = require("./routes/recipe.routes");
 app.use("/recipe", recipeRoutes);
+
 require("./error-handling")(app);
 
 

@@ -8,6 +8,7 @@ const User = require("../models/User.model");
 const Recipe = require("../models/Recipe.model");
 
 router.post("/", isAuthenticated, async (req, res) => {
+  console.log(req)
   const { _id } = req.payload;
   const newRecipe = await Recipe.create(req.body);
   await User.findByIdAndUpdate(_id, { $push: { recipes: newRecipe._id } });
