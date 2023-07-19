@@ -19,7 +19,7 @@ router.use("/cloudinary", cloudinaryRoutes);
 const recipeRoutes = require("./recipe.routes");
 router.use("/recipe", recipeRoutes);
 
-const recipeRoutes = require("./upload.routes");
-router.use("/upload", recipeRoutes);
+const uploadRoutes = require("./upload.routes");
+router.use("/upload", uploadRoutes);
 
 module.exports = router;
