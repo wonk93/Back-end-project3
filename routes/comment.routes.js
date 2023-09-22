@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
-
 const User = require("../models/User.model");
 const Recipe = require("../models/Recipe.model");
 const Comment = require("../models/Comment.model");
@@ -17,3 +16,4 @@ router.post("/", isAuthenticated, async (req, res, next) => {
 });
 
 module.exports = router;
+/*Ver si falta por añadir más metodos de delete, get, put*/ 

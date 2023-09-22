@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
 const User = require("./../models/User.model");
 const { isAuthenticated } = require("../middlewares/verifyToken.middleware");
 const saltRounds = 10;
@@ -9,6 +8,11 @@ const saltRounds = 10;
 router.post("/signup", (req, res, next) => {
   console.log(req.body);
   const { email, password, userName } = req.body;
+
+  if (email === '' || password === '' || userName === '') {
+    res.status(400).json({ message: 'Se requiere email, contraseña, nombre de usuario y nombre completo' })
+    return
+}
 
   if (password.length < 2) {
     res
