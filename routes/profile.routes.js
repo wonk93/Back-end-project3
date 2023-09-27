@@ -14,6 +14,7 @@ router.get("/", isAuthenticated, (req, res, next) => {
     }
   });
 });
+//Crear una ruta get donde se le pase el Id del usuario
 
 router.put("/", isAuthenticated, (req, res, next) => {
   const { email } = req.payload;

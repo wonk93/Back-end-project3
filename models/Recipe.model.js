@@ -19,7 +19,6 @@ const recipeSchema = new Schema({
   image: {
     type: String,
     trim: true,
-    requiered: true,
     unique: false,
   },
   instructions: {
@@ -27,10 +26,16 @@ const recipeSchema = new Schema({
     trim: true,
     required: true,
     unique: false,
+    maxLength: 5000,
+  },
+  ingredients: {
+    type: String,
+    trim: true,
+    required: true,
+    unique: false,
     maxLength: 500,
   },
-  ingredients: [String],
-  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+  comments: [{type: Schema.Types.ObjectId, ref: "Comment"}],
 });
 
 const Recipe = model("Recipe", recipeSchema);

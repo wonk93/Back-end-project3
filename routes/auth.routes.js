@@ -14,7 +14,7 @@ router.post("/signup", (req, res, next) => {
     return
 }
 
-  if (password.length < 2) {
+  if (password.length < 8) {
     res
       .status(400)
       .json({ message: "Password must have at least 2 characters" });
@@ -69,7 +69,7 @@ router.post("/login", (req, res, next) => {
           expiresIn: "6h"
         });
 
-        res.json({ authToken });
+        res.json({ authToken, user: payload });
       } else {
         res.status(401).json({ message: "Unable to authenticate the user" });
       }

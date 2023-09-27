@@ -13,9 +13,8 @@ router.post("/", isAuthenticated, async (req, res) => {
   const newRecipe = await Recipe.create(req.body);
   await User.findByIdAndUpdate(_id, { $push: { recipes: newRecipe._id } });
 
-  // ToDo: Cambiar por la otra linea comentada
+
   return res.status(200).json(newRecipe);
-  // res.redirect("/");
 });
 
 router.get("/byName/:recipeName", isAuthenticated, async (req, res) => {
@@ -40,3 +39,18 @@ router.get("/byAuthor", isAuthenticated, async (req, res) => {
 });
 
 module.exports = router;
+
+// router.get('/:id', async (req, res) => {
+//   try {
+//     const recipe = await Recipe.findById(req.params.id);
+//     if (!recipe) {
+//       return res.status(404).json({ message: 'Receta no encontrada' });
+//     }
+//     res.json(recipe);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Error al obtener la receta' });
+//   }
+// });
+
+// module.exports = router;
