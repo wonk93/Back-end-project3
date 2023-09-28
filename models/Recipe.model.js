@@ -21,6 +21,7 @@ const recipeSchema = new Schema({
     trim: true,
     unique: false,
   },
+  
   instructions: {
     type: String,
     trim: true,
@@ -31,7 +32,7 @@ const recipeSchema = new Schema({
   ingredients: {
     type: String,
     trim: true,
-    required: true,
+    required: false,
     unique: false,
     maxLength: 500,
   },
