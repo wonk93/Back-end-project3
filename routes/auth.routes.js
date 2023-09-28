@@ -6,7 +6,6 @@ const { isAuthenticated } = require("../middlewares/verifyToken.middleware");
 const saltRounds = 10;
 
 router.post("/signup", (req, res, next) => {
-  console.log(req.body);
   const { email, password, userName } = req.body;
 
   if (email === '' || password === '' || userName === '') {
@@ -17,7 +16,7 @@ router.post("/signup", (req, res, next) => {
   if (password.length < 8) {
     res
       .status(400)
-      .json({ message: "Password must have at least 2 characters" });
+      .json({ message: "Password must have at least 8 characters" });
     return;
   }
 
