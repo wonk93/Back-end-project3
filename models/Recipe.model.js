@@ -16,7 +16,7 @@ const recipeSchema = new Schema({
     unique: false,
     toUpperCase: true,
   },
-  image: {
+  imageURL: {
     type: String,
     trim: true,
     unique: false,

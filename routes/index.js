@@ -9,6 +9,9 @@ router.use("/auth", require("./auth.routes"));
 const profileRoutes = require("./profile.routes");
 router.use("/profile", profileRoutes);
 
+const ingredientsRoutes = require("./ingredients.routes");
+router.use("/ingredients", ingredientsRoutes);
+
 const commentRoutes = require("./comment.routes");
 router.use("/comment", commentRoutes);
 

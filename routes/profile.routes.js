@@ -16,24 +16,13 @@ router.get("/", isAuthenticated, (req, res, next) => {
 });
 //Crear una ruta get donde se le pase el Id del usuario
 
-router.put("/", isAuthenticated, (req, res, next) => {
-  const { email } = req.payload;
-  const { newImage, newNickName } = req.body;
-  User.findOne({ email }).then((foundUser) => {
-    if (foundUser) {
-      const userToUpdate = {
-        ...foundUser,
-        nickName: newNickName,
-        image: newImage,
-      };
-      const updatedUser = User.findByIdAndUpdate(foundUser._id, userToUpdate, {
-        new: true,
-      });
-      return res.status(200).json(updatedUser);
-    } else {
-      return res.status(400).json({ message: "User doesn't exist." });
-    }
+router.put("/edit-profile", isAuthenticated, async (req, res, next) => {
+  const { _id } = req.payload;
+  const { imageURL } = req.body;
+  const updatedUser = await User.findByIdAndUpdate(_id, {imageURL}, {
+    new: true,
   });
+  res.json(updatedUser)
 });
 
 module.exports = router;

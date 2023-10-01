@@ -22,7 +22,7 @@ router.get("/:recipeId", isAuthenticated, async (req, res)=> {
   res.json(recipeComments);
 });
 
-router.put("/:recipeId", isAuthenticated, async (req, res) => {
+router.put("/actualizar/recipeId", isAuthenticated, async (req, res) => {
   try {
     const { recipeId } = req.params;
     const { text } = req.body;
@@ -44,7 +44,7 @@ router.put("/:recipeId", isAuthenticated, async (req, res) => {
   }
 });
 
-router.delete("/:recipeId", isAuthenticated, async (req, res) => {
+router.delete("/delete/recipeId", isAuthenticated, async (req, res) => {
   try {
     const { recipeId } = req.params;
 

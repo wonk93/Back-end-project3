@@ -42,7 +42,7 @@ const userSchema = new Schema(
     birthday: {
       type: Date
     },
-    image: {
+    imageURL: {
       type: String,
       requiered: false,
       unique: false,
