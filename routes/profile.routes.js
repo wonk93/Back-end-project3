@@ -14,15 +14,18 @@ router.get("/", isAuthenticated, (req, res, next) => {
     }
   });
 });
-//Crear una ruta get donde se le pase el Id del usuario
 
 router.put("/edit-profile", isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
   const { imageURL } = req.body;
-  const updatedUser = await User.findByIdAndUpdate(_id, {imageURL}, {
-    new: true,
-  });
-  res.json(updatedUser)
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    { imageURL },
+    {
+      new: true,
+    }
+  );
+  res.json(updatedUser);
 });
 
 module.exports = router;

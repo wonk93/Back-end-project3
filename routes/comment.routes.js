@@ -9,14 +9,18 @@ const { isAuthenticated } = require("../middlewares/verifyToken.middleware");
 router.post("/", isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
   const comment = await Comment.create({ text: req.body.text, user: _id });
-  const updatedRecipe = await Recipe.findByIdAndUpdate(req.body.recipeId, {
-    $push: { comments: comment._id }
-  }, {new: true});
+  const updatedRecipe = await Recipe.findByIdAndUpdate(
+    req.body.recipeId,
+    {
+      $push: { comments: comment._id },
+    },
+    { new: true }
+  );
   res.json(updatedRecipe);
 });
 
-router.get("/:recipeId", isAuthenticated, async (req, res)=> {
-  const  { recipeId } = req.params;
+router.get("/:recipeId", isAuthenticated, async (req, res) => {
+  const { recipeId } = req.params;
   const recipe = await Recipe.findById(recipeId).populate("comments");
   const recipeComments = recipe.comments;
   res.json(recipeComments);
@@ -61,7 +65,4 @@ router.delete("/delete/recipeId", isAuthenticated, async (req, res) => {
   }
 });
 
-
 module.exports = router;
-
-

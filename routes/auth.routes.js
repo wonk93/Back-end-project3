@@ -8,10 +8,15 @@ const saltRounds = 10;
 router.post("/signup", (req, res, next) => {
   const { email, password, userName } = req.body;
 
-  if (email === '' || password === '' || userName === '') {
-    res.status(400).json({ message: 'Se requiere email, contraseña, nombre de usuario y nombre completo' })
-    return
-}
+  if (email === "" || password === "" || userName === "") {
+    res
+      .status(400)
+      .json({
+        message:
+          "Se requiere email, contraseña, nombre de usuario y nombre completo",
+      });
+    return;
+  }
 
   if (password.length < 8) {
     res
@@ -21,7 +26,7 @@ router.post("/signup", (req, res, next) => {
   }
 
   User.findOne({ email })
-    .then(foundUser => {
+    .then((foundUser) => {
       if (foundUser) {
         res.status(400).json({ message: "User already exists." });
         return;
@@ -32,13 +37,13 @@ router.post("/signup", (req, res, next) => {
 
       return User.create({ email, password: hashedPassword, userName });
     })
-    .then(createdUser => {
+    .then((createdUser) => {
       const { email, userName, _id } = createdUser;
       const user = { email, userName, _id };
 
       res.status(201).json({ user });
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
@@ -52,7 +57,7 @@ router.post("/login", (req, res, next) => {
   }
 
   User.findOne({ email })
-    .then(foundUser => {
+    .then((foundUser) => {
       if (!foundUser) {
         res.status(401).json({ message: "User not found." });
         return;
@@ -65,7 +70,7 @@ router.post("/login", (req, res, next) => {
 
         const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
           algorithm: "HS256",
-          expiresIn: "6h"
+          expiresIn: "6h",
         });
 
         res.json({ authToken, user: payload });
@@ -73,11 +78,10 @@ router.post("/login", (req, res, next) => {
         res.status(401).json({ message: "Unable to authenticate the user" });
       }
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
 router.get("/verify", isAuthenticated, (req, res, next) => {
-
   res.status(200).json(req.payload);
 });
 
