@@ -11,7 +11,7 @@ module.exports = (app) => {
   app.set("trust proxy", 1);
   app.use(
     cors({
-      origin:  process.env.FRONTEND_URL
+      origin:  ["http://localhost:3000", "https://tu-frontend-fly-subdominio.fly.dev"]
     })
   );
   app.use(logger("dev"));
