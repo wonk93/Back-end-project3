@@ -11,7 +11,7 @@ module.exports = (app) => {
   app.set("trust proxy", 1);
   app.use(
     cors({
-      origin:  ["http://localhost:3000", "https://tu-frontend-fly-subdominio.fly.dev"]
+      origin:  "https://serene-boba-d890b4.netlify.app"
     })
   );
   app.use(logger("dev"));
